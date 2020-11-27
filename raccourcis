@@ -1,0 +1,3 @@
+Dans le dossier de travail:
+le chemin à spécifier part du dossier de travail
+ln -s ../<dossier>/<fichier>
