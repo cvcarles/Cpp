@@ -12,6 +12,7 @@ int main(void) {
 	c3.ecrireComplexe();
 	cout << c3.rho() << " , " << c3.theta() << endl;
 	complexe::polcomplexe(c3.rho(),c3.theta()).ecrireComplexe();
+	cout << c2 << endl;
 
 	return EXIT_SUCCESS;
 }
