@@ -26,7 +26,7 @@ void p(){
 }
 
 void f(){
-    throw 40;
+    throw MonException();
 }
 
 void g(){
@@ -41,7 +41,7 @@ void g(){
 }
 
 void finir(){
-    cerr << "C'est fini ... je ne tiens plus ... arrrgh" << endl;
+    cerr << "Mauvais type d'exception" << endl;
 }
 
 void fprime(){
@@ -55,7 +55,7 @@ void gprime(){
 int main(){
     std::set_terminate(finir);
 	srand(time(nullptr));
-    /*try {
+    try {
         p();
     }
 	catch (int e){
@@ -82,11 +82,11 @@ int main(){
         gprime();
     }
     catch(const MonException2 &e){
-
+        cerr << e.what() << endl;
     }
     catch(const MonException1 &e){
-
-    }*/
+        cerr << e.what() << endl;
+    }
 
     tableau <5, complexe> tc;
 
@@ -102,7 +102,7 @@ int main(){
 
     ti2=ti1;
     ti2[5]=20;
-    cout << ti1[5] << endl;
+    cout << ti2[5] << endl;
     try{
         cout << ti2[-1] << endl;
     }
