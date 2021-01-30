@@ -6,6 +6,7 @@
 #include <forward_list>
 #include <string>
 #include <sstream>
+#include <map>
 
 template <typename T>
 class Pile {

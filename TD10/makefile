@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall
 LDFLAGS =
-SRC = exo.cpp
+SRC = exo_bis.cpp
 PROG = exo
 OBJS = $(SRC:.cpp=.o)
 .SUFFIXES : .cpp .o
