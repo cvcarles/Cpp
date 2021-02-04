@@ -19,11 +19,12 @@ public:
     void inserer(const string mot) {
         if (dico.find(mot) == dico.end()) dico[mot] = 1;
         else dico[mot] +=1;
+        cout << "j'ajoute " << mot << endl;
     }
     const std::string toString() const {
         std::ostringstream s;
         for (typename map<string, int>::const_iterator it = this->dico.begin(); it!=this->dico.end(); it++) {
-            cout << it->first << ": " << it->second << endl;
+            s << it->first << ": " << it->second << endl;
         }
 		return s.str();
     }
@@ -44,15 +45,13 @@ void lecture(string s1) {
     string s= "";
 
     while (ios.get(c)){
-        if (c!='\n') {
-            if (c == ' ') {
-                liste.inserer(s);
-                cout << "j'ajoute " << s << endl;
-                s = "";
-            }
-            else s+=c;
+        if (c == '\n' or c == ' ') {
+            liste.inserer(s);
+            s = "";
         }
-	}
+        else s+=c;
+	} 
+    liste.inserer(s);
 
     cout << liste << endl;
 
