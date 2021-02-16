@@ -24,23 +24,19 @@ class Matrice {
         pointer position;
     public: 
         iterator (pointer p) : position(p) {}
-        iterator &operator++() {...}
-        iterator operator++(int) {...}
-        reference operator*() const {...}
-        pointer operator->() const {...}
-        bool operator==(const iterator &it) {
-            
-        }
-        bool operator!=(const iterator &it) {
-            
-        }
+        iterator &operator++() {return ++this->position;}
+        iterator operator++(int) {return this->position++;}
+        reference operator*() const {return *this->position;}
+        pointer operator->() const {return &this->position;}
+        bool operator==(const iterator &it) {return this->position == it;}
+        bool operator!=(const iterator &it) {return this->position != it;}
     };
 protected:
     const int size = M*N;
     T *mat;
 public:
     Matrice(const T &v = T()) : mat(new T[size]) {
-        for (int i=0; i< this->size; i++) this->mat[i] = v;
+        for (int i=0; i < this->size; i++) this->mat[i] = v;
     }
     ~Matrice() {delete [] this->mat;}
 
