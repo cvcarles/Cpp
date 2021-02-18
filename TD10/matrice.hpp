@@ -79,8 +79,8 @@ public:
 
     std::string toString() const {
         std::ostringstream s;
-        for (int i; i < M; i++) {
-            for (int j; j < N; j++) s << this->mat[N*i+j] << " ";
+        for (int i=0; i < M; i++) {
+            for (int j=0; j < N; j++) s << this->mat[N*i+j] << " ";
             s << "\n";
         }
 		return s.str();
