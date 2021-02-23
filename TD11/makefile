@@ -11,7 +11,7 @@ all: $(PROG)
 $(PROG): $(OBJS)
 	$(CC)	-o $@ $^ $(LDFLAGS)
 
-exo.o: matrice.hpp
+exo.o: matrice.hpp commandes.hpp
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $<
 
