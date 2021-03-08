@@ -3,6 +3,7 @@
 #include <iterator>
 #include "matrice.hpp"
 #include "commandes.hpp"
+#include "historique.hpp"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ int main() {
     Matrice<M,N,int> m;
     char code;
     Command *cmd = nullptr;
-    bool undoing_mode = false;
+    History<Command *> *history = new HistoryList<Command *>();
 
     srand(time(nullptr));
 
@@ -21,27 +22,34 @@ int main() {
     cout << "cmd>";
 
     while (cin >> code) {
-        if (code == 's' || code == 'a' || code == 'q') {
+        if (code == 's' || code == 'a' || code == 'q' || code == 'p' || code == 'h') {
             switch (code) {
                 case 's' : cmd = new SetValue<M,N,int>(&m, random()%M, random()%N, random()%100); break;
                 case 'a' : cmd = new AddValue<M,N,int>(&m, random()%100); break;
+                case 'p' : cmd = new display<M,N,int>(&m); break;
+                case 'h' : cmd = new help; break;
                 case 'q' : return EXIT_SUCCESS;
                 default : cerr << "Commande inconnue" << endl;
             }
+            if (!history->is_last()) history->remove_all_right();
+            history->put(cmd);
             cmd->execute();
-            undoing_mode = false;
         }
         else {
             if (code == 'u') {
-                if (cmd != nullptr) {
-                    if (undoing_mode) {
-                        cmd->execute();
-                        undoing_mode = false;
-                    }
-                    else {
-                        cmd->undo();
-                        undoing_mode = true;
-                    }
+                if (history->on_item()) {
+                    history->item()->undo();
+                    history->back();
+                }
+                else cerr << "Rien à défaire" << endl;
+            }
+            else if (code == 'r') {
+                if (!history->is_last()) {
+                    history->forth();
+                    history->item()->redo();
+                }
+                else {
+                    cerr << "Rien à refaire" << endl;
                 }
             }
             else {
